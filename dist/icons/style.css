@@ -1,0 +1,102 @@
+@font-face {
+  font-family: 'WYSIWYG';
+  src:  url('fonts/WYSIWYG.eot?d8tyl5');
+  src:  url('fonts/WYSIWYG.eot?d8tyl5#iefix') format('embedded-opentype'),
+    url('fonts/WYSIWYG.ttf?d8tyl5') format('truetype'),
+    url('fonts/WYSIWYG.woff?d8tyl5') format('woff'),
+    url('fonts/WYSIWYG.svg?d8tyl5#WYSIWYG') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'WYSIWYG' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-picture:before {
+  content: "\e912";
+}
+.icon-terminal:before {
+  content: "\e913";
+}
+.icon-paragraph:before {
+  content: "\e914";
+}
+.icon-redo:before {
+  content: "\e915";
+}
+.icon-header:before {
+  content: "\e916";
+}
+.icon-subscript:before {
+  content: "\e917";
+}
+.icon-superscript:before {
+  content: "\e918";
+}
+.icon-justify:before {
+  content: "\e900";
+}
+.icon-code:before {
+  content: "\e901";
+}
+.icon-ordered-list:before {
+  content: "\e902";
+}
+.icon-align-right:before {
+  content: "\e903";
+}
+.icon-unlink:before {
+  content: "\e904";
+}
+.icon-align-left:before {
+  content: "\e905";
+}
+.icon-link:before {
+  content: "\e906";
+}
+.icon-unindent:before {
+  content: "\e907";
+}
+.icon-underline:before {
+  content: "\e908";
+}
+.icon-align-center:before {
+  content: "\e909";
+}
+.icon-strike-through:before {
+  content: "\e90a";
+}
+.icon-unordered-list:before {
+  content: "\e90b";
+}
+.icon-horizontal-ruler:before {
+  content: "\e90c";
+}
+.icon-indent:before {
+  content: "\e90d";
+}
+.icon-undo:before {
+  content: "\e90e";
+}
+.icon-italic:before {
+  content: "\e90f";
+}
+.icon-bold:before {
+  content: "\e910";
+}
+.icon-clear-format:before {
+  content: "\e911";
+}
