@@ -1,47 +1,82 @@
 const editor = document.getElementById('editor');
 const toolbar = document.getElementById('toolbar');
 const buttons = document.getElementsByClassName('btn');
+const visualView = document.getElementById('visual-view');
+const htmlView = document.getElementById('html-view');
 
-for (let i = 0; i < buttons.length; i++) {
-    let button = buttons[i];
+// enabling resize by default
+document.execCommand('enableObjectResizing', false);
 
-    button.addEventListener('click', function (e) {
-        let action = this.dataset.action;
+// add event listeners
+[...buttons].forEach(button => {
+    button.addEventListener('click', toolbarClick);
+});
 
-        switch (action) {
-            case 'code':
-                execCodeAction(this, editor);
-                break;
-            case 'createLink':
-                execPrompt('createLink', 'Link (e.g. https://webdeasy.de/)');
-                break;
-            case 'heading':
-                execPrompt('heading', 'Heading h1-6');
-                break;
-            case 'insertImage':
-                execPrompt('insertImage', 'https://via.placeholder.com/150');
-                break;
-            default:
-                document.execCommand(action, false);
-        }
-    });
+visualView.onkeydown =  kbdShortcuts;
+
+function kbdShortcuts(e) {
+    let key = e.which || e.keyCode;
+
+    if (key == 9) { // tab handling
+        e.preventDefault();
+        document.execCommand('insertHTML', false, '&emsp;');
+    } else if (e.ctrlKey && key == 66) { // ctrl + b for bold
+        e.preventDefault();
+        document.execCommand('bold', false);
+    } else if (e.ctrlKey && key == 73) { // ctrl + i for italic
+        e.preventDefault();
+        document.execCommand('italic', false);
+    } else if (e.ctrlKey && key == 85) { // ctrl + u for underline
+        e.preventDefault();
+        document.execCommand('underline', false);
+    }
 }
 
-//run enableObjectResizing by default
+function toolbarClick() {
+    let action = this.dataset.action;
 
-function execCodeAction(button, editor) {
-    const visuellView = document.getElementById('visuell-view');
-    const htmlView = document.getElementById('html-view');
+    switch (action) {
+        case 'code':
+            execCodeAction(this, editor);
+            break;
+        case 'codeBlock':
+            handleCodeBlock();
+            break;
+        case 'insertImage':
+            handleImage();
+            break;
+        case 'createLink':
+            execPrompt('createLink', 'Link (e.g. https://webdeasy.de/)');
+            break;
+        case 'heading':
+            execPrompt('heading', 'Heading h1-6');
+            break;
+        default:
+            document.execCommand(action, false);
+    }
+}
 
+function execCodeAction(button) {
     if (button.classList.contains('active')) {
-        visuellView.innerHTML = htmlView.value;
+        visualView.innerHTML = htmlView.value;
     } else {
-        htmlView.value = visuellView.innerHTML;
+        htmlView.value = visualView.innerHTML;
     }
 
-    visuellView.classList.toggle('hidden');
+    visualView.classList.toggle('hidden');
     htmlView.classList.toggle('hidden');
     button.classList.toggle('active');
+}
+
+function handleCodeBlock() {
+    let template = '<pre><code>code</code></pre>';
+    document.execCommand('insertHTML', false, template);
+}
+
+function handleImage() {
+    let source = prompt("Image link:");
+    let template = '<figure><img src="' + source + '"><figcaption>Caption here</figcaption</figure>';
+    document.execCommand('insertHTML', false, template);
 }
 
 function execPrompt(command, displayString) {

@@ -5,141 +5,145 @@
   <meta charset="UTF-8">
   <title>CodePen - WYSIWYG Editor</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Stylesheets -->
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.1/tailwind.min.css'>
   <link rel="stylesheet" href="./tailwindTypography.css">
   <link rel="stylesheet" href="./icons/style.css">
-  <link href="./prism/prism.css" rel="stylesheet" />
-  <script src="./prism/prism.js"></script>
+  <!-- Scripts -->
+  <script defer src="./script.js"></script>
 </head>
 
 <body class="bg-blue-100 flex flex-col items-center justify-center min-h-screen">
-<!-- partial:index.partial.html -->
-<div id="editor" class="flex flex-col max-w-xl w-4/5 md:w-2/3 lg:w-1/2 min-h-50 border-t-8 border-green-300 bg-white rounded-lg shadow-xl mb-8" style="min-height: 20rem; max-height: 70vh;">
-  <div id="toolbar">
-    <div class="flex border-b border-gray-400">
-      
-      <div class="flex border-r border-gray-400">
-        <button class="btn px-1 hover:bg-blue-100" data-action="bold" title="Bold">
-          <span class="icon-bold text-gray-800"></span>
-        </button>
-        <button class="btn px-1 hover:bg-blue-100" data-action="italic" title="Italic">
-          <span class="icon-italic text-gray-800"></span>
-        </button>
-        <button class="btn px-1 hover:bg-blue-100" data-action="underline" title="Underline">
-          <span class="icon-underline text-gray-800"></span>
-        </button>
-        <button class="btn px-1 hover:bg-blue-100" data-action="strikeThrough" title="Strike through">
-          <span class="icon-strike-through text-gray-800"></span>
-        </button>
+
+  <div id="editor"
+    class="flex flex-col max-w-xl w-4/5 md:w-2/3 lg:w-1/2 min-h-50 border-t-8 border-green-400 bg-white rounded-lg shadow-xl mb-8"
+    style="min-height: 20rem; max-height: 70vh;">
+    <div id="toolbar">
+      <div class="flex border-b border-gray-400">
+
+        <div class="flex border-r border-gray-400">
+          <button class="btn px-1 hover:bg-blue-100" data-action="bold" title="Bold">
+            <span class="icon-bold text-gray-800"></span>
+          </button>
+          <button class="btn px-1 hover:bg-blue-100" data-action="italic" title="Italic">
+            <span class="icon-italic text-gray-800"></span>
+          </button>
+          <button class="btn px-1 hover:bg-blue-100" data-action="underline" title="Underline">
+            <span class="icon-underline text-gray-800"></span>
+          </button>
+          <button class="btn px-1 hover:bg-blue-100" data-action="strikeThrough" title="Strike through">
+            <span class="icon-strike-through text-gray-800"></span>
+          </button>
+        </div>
+
+        <div class="flex border-r border-gray-400">
+          <button class="btn px-1 hover:bg-blue-100" data-action="justifyFull" title="Justify block">
+            <span class="icon-justify text-gray-800"></span>
+          </button>
+          <button class="btn px-1 hover:bg-blue-100" data-action="justifyLeft" title="Justify left">
+            <span class="icon-align-left text-gray-800"></span>
+          </button>
+          <button class="btn px-1 hover:bg-blue-100" data-action="justifyCenter" title="Justify center">
+            <span class="icon-align-center text-gray-800"></span>
+          </button>
+          <button class="btn px-1 hover:bg-blue-100" data-action="justifyRight" title="Justify right">
+            <span class="icon-align-right text-gray-800"></span>
+          </button>
+        </div>
+
+        <div class="flex border-r border-gray-400">
+          <button class="btn px-1 hover:bg-blue-100" data-action="insertOrderedList" title="Insert ordered list">
+            <span class="icon-ordered-list text-gray-800"></span>
+          </button>
+          <button class="btn px-1 hover:bg-blue-100" data-action="insertUnorderedList" title="Insert unordered list">
+            <span class="icon-unordered-list text-gray-800"></span>
+          </button>
+          <button class="btn px-1 hover:bg-blue-100" data-action="outdent" title="Unindent">
+            <span class="icon-unindent text-gray-800"></span>
+          </button>
+          <button class="btn px-1 hover:bg-blue-100" data-action="indent" title="Indent">
+            <span class="icon-indent text-gray-800"></span>
+          </button>
+        </div>
+
+        <div class="flex">
+          <button class="btn px-1 hover:bg-blue-100" data-action="insertHorizontalRule" title="Insert horizontal rule">
+            <span class="icon-horizontal-ruler text-gray-800"></span>
+          </button>
+          <button class="btn px-1 hover:bg-blue-100" data-action="heading" title="Insert heading">
+            <span class="icon-header text-gray-800"></span>
+          </button>
+          <button class="btn px-1 hover:bg-blue-100" data-action="insertParagraph" title="Insert paragraph">
+            <span class="icon-paragraph text-gray-800"></span>
+          </button>
+          <button class="btn px-1 hover:bg-blue-100" data-action="subscript" title="Insert subscript">
+            <span class="icon-subscript text-gray-800"></span>
+          </button>
+          <button class="btn px-1 hover:bg-blue-100" data-action="superscript" title="Insert superscript">
+            <span class="icon-superscript text-gray-800"></span>
+          </button>
+          <button class="btn px-1 hover:bg-blue-100" data-action="insertImage" title="Insert image">
+            <span class="icon-picture text-gray-800"></span>
+          </button>
+        </div>
       </div>
 
-      <div class="flex border-r border-gray-400">
-        <button class="btn px-1 hover:bg-blue-100" data-action="justifyFull" title="Justify block">
-          <span class="icon-justify text-gray-800"></span>
-        </button>
-        <button class="btn px-1 hover:bg-blue-100" data-action="justifyLeft" title="Justify left">
-          <span class="icon-align-left text-gray-800"></span>
-        </button>
-        <button class="btn px-1 hover:bg-blue-100" data-action="justifyCenter" title="Justify center">
-          <span class="icon-align-center text-gray-800"></span>
-        </button>
-        <button class="btn px-1 hover:bg-blue-100" data-action="justifyRight" title="Justify right">
-          <span class="icon-align-right text-gray-800"></span>
-        </button>
-      </div>
-      
-      <div class="flex border-r border-gray-400">  
-        <button class="btn px-1 hover:bg-blue-100" data-action="insertOrderedList" title="Insert ordered list">
-          <span class="icon-ordered-list text-gray-800"></span>
-        </button>
-        <button class="btn px-1 hover:bg-blue-100" data-action="insertUnorderedList" title="Insert unordered list">
-          <span class="icon-unordered-list text-gray-800"></span>
-        </button>
-        <button class="btn px-1 hover:bg-blue-100" data-action="outdent" title="Unindent">
-          <span class="icon-unindent text-gray-800"></span>
-        </button>
-        <button class="btn px-1 hover:bg-blue-100" data-action="indent" title="Indent">
-          <span class="icon-indent text-gray-800"></span>
-        </button>
-      </div>
+      <div class="flex border-b border-gray-400">
+        <div class="flex border-r border-gray-400">
+          <button class="btn px-1 hover:bg-blue-100" data-action="undo" title="Undo">
+            <span class="icon-undo text-gray-800"></span>
+          </button>
+          <button class="btn px-1 hover:bg-blue-100" data-action="redo" title="Redo">
+            <span class="icon-redo text-gray-800"></span>
+          </button>
+          <button class="btn px-1 hover:bg-blue-100" data-action="removeFormat" title="Remove format">
+            <span class="icon-clear-format text-gray-800"></span>
+          </button>
+        </div>
 
-      <div class="flex border-r border-gray-400">
-        <button class="btn px-1 hover:bg-blue-100" data-action="insertHorizontalRule" title="Insert horizontal rule">
-          <span class="icon-horizontal-ruler text-gray-800"></span>
-        </button>
-        <button class="btn px-1 hover:bg-blue-100" data-action="heading" title="Insert horizontal rule">
-          <span class="icon-header text-gray-800"></span>
-        </button>
-        <button class="btn px-1 hover:bg-blue-100" data-action="insertParagraph" title="Insert horizontal rule">
-          <span class="icon-paragraph text-gray-800"></span>
-        </button>
-        <button class="btn px-1 hover:bg-blue-100" data-action="subscript" title="Insert horizontal rule">
-          <span class="icon-subscript text-gray-800"></span>
-        </button>
-        <button class="btn px-1 hover:bg-blue-100" data-action="superscript" title="Insert horizontal rule">
-          <span class="icon-superscript text-gray-800"></span>
-        </button>
-        <button class="btn px-1 hover:bg-blue-100" data-action="insertImage" title="Insert horizontal rule">
-          <span class="icon-picture text-gray-800"></span>
-        </button>
+        <div class="flex border-r border-gray-400">
+          <button class="btn px-1 hover:bg-blue-100" data-action="createLink" title="Insert Link">
+            <span class="icon-link text-gray-800"></span>
+          </button>
+          <button class="btn px-1 hover:bg-blue-100" data-action="unlink" title="Unlink">
+            <span class="icon-unlink text-gray-800"></span>
+          </button>
+        </div>
+
+        <div class="flex">
+          <button class="btn px-1 hover:bg-blue-100" data-action="code" title="Show HTML-Code">
+            <span class="icon-code text-gray-800"></span>
+          </button>
+          <button class="btn px-1 hover:bg-blue-100" data-action="codeBlock" title="Insert Code Block">
+            <span class="icon-terminal text-gray-800"></span>
+          </button>
+        </div>
       </div>
     </div>
 
-    <div class="flex border-b border-gray-400">
-      <div class="flex border-r border-gray-400">
-        <button class="btn px-1 hover:bg-blue-100" data-action="undo" title="Undo">
-          <span class="icon-undo text-gray-800"></span>
-        </button>
-        <button class="btn px-1 hover:bg-blue-100" data-action="redo" title="Redo">
-          <span class="icon-redo text-gray-800"></span>
-        </button>
-        <button class="btn px-1 hover:bg-blue-100" data-action="removeFormat" title="Remove format">
-          <span class="icon-clear-format text-gray-800"></span>
-        </button>
+    <div id="content-area" class="flex-1 px-6 py-4 overflow-y-scroll">
+      <div id="visual-view" class="outline-none prose" contenteditable>
+        <p style="text-align: center;">Welcome to my <b>WYSIWYG</b> Editor <i>(What you see is what you get)</i>!</p>
+        <p style="text-align: center;">Built with <b>HTML5</b>, <b>TailwindCSS</b> and vanilla<b> JS</b>.</p>
+        <p style="text-align: center;">log<sub>2</sub>(1024) = 10</p>
+        <p style="text-align: center;">e = mc<sup>2<br></sup></p>
+        <hr>
+        <div align="center">
+          <figure><img src="https://via.placeholder.com/150">
+            <figcaption>Caption here</figcaption>
+          </figure>
+        </div>
+        <p style="text-align: center;"><b>This is a <a
+              href="https://webdeasy.de/en/program-your-own-wysiwyg-editor-in-10-minutes/">link</a>! 😋</b></p>
+        <pre><code>code block!!!!!</code></pre>
       </div>
-      
-      <div class="flex border-r border-gray-400">
-        <button class="btn px-1 hover:bg-blue-100" data-action="createLink" title="Insert Link">
-          <span class="icon-link text-gray-800"></span>
-        </button>
-        <button class="btn px-1 hover:bg-blue-100" data-action="unlink" title="Unlink">
-          <span class="icon-unlink text-gray-800"></span>
-        </button>
-      </div>
-      
-      <div class="flex border-r border-gray-400">
-        <button class="btn px-1 hover:bg-blue-100" data-action="code" title="Show HTML-Code">
-          <span class="icon-code text-gray-800"></span>
-        </button>
-        <button class="btn px-1 hover:bg-blue-100" data-action="codeBlock" title="Insert Code block">
-          <span class="icon-terminal text-gray-800"></span>
-        </button>
-      </div>
-      
+      <textarea id="html-view" class="resize-none w-full h-full outline-none hidden"></textarea>
     </div>
   </div>
 
-  <div id="content-area" class="flex-1 px-6 py-4 overflow-y-scroll">
-    <div id="visuell-view" class="outline-none prose" contenteditable>
-      <p style="text-align: center;">Welcome to my <b>WYSIWYG</b> Editor <i>(What you see is what you get)</i>!</p>
-      <p style="text-align: center;">Built with <b>HTML5</b>, <b>TailwindCSS</b> and <b>Prism</b>.</p>
-      <p style="text-align: center;">log<sub>2</sub>(1024) = 10</p>
-      <p style="text-align: center;">e = mc<sup>2<br></sup></p>
-      <hr>
-      <p style="text-align: center;"><b>This is a <a href="https://webdeasy.de/en/program-your-own-wysiwyg-editor-in-10-minutes/">link</a>! 😋</b></p>
-      <div align="center"><img src="https://via.placeholder.com/150"></div>
-      <pre><code class="language-js">let number = 5;
-console.log(number);</code></pre>
-    </div>
-    <textarea id="html-view" class="resize-none w-full h-full outline-none hidden"></textarea>
-  </div>
-</div>
-
-<footer class="flex justify-center w-full fixed bottom-0 mb-2">
-  <p class="font-mono font-semibold text-xl">Coded with ❤️ by David Machado </p>
-</footer>
-<!-- partial -->
-<script  src="./script.js"></script>
-
+  <footer class="flex justify-center w-full fixed bottom-0 mb-2">
+    <p class="font-mono font-semibold text-xl">Coded with ❤️ by David Machado </p>
+  </footer>
 </body>
+
 </html>
